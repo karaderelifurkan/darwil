@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devecioğlu | Teslimat ve Ödeme</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    body { font-family: "Segoe UI", Roboto, sans-serif; background-color: #f8f9fa; color: #333; }
+    header { background: #0d6efd; color: #fff; padding: 8px; text-align: center; font-weight: 500; font-size: 0.9rem; }
+    .navbar { background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+    .navbar-brand { font-weight: 700; color: #0d6efd !important; font-size: 1.3rem; }
+
+    main { max-width: 1200px; margin: 2rem auto; }
+    .form-section { background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+    h2 { font-weight: 700; color: #0d6efd; font-size: 1.6rem; }
+    .hidden { display: none; }
+    .btn-next { background: #198754; color: #fff; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 600; }
+    .btn-next:hover { background: #157347; }
+
+    /* Sepet Özeti */
+    .cart-summary {
+      background: #fff; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      padding: 1.5rem; position: sticky; top: 90px;
+    }
+    .cart-summary h4 { font-weight: 700; color: #555; text-align: center; }
+    .cart-summary hr { margin: 1rem 0; }
+    .cart-summary .row p { margin: 0; }
+    .cart-summary .total { font-weight: 700; font-size: 1.3rem; }
+    .btn-pay { background: #0d6efd; color: #fff; border: none; width: 100%; padding: 0.75rem; border-radius: 6px; font-weight: 600; }
+    .btn-pay:hover { background: #0b5ed7; }
+
+    footer { text-align: center; background: #0d6efd; color: #fff; padding: 1.5rem 0; margin-top: 3rem; }
+  </style>
+</head>
+
+<body>
+  <header>🚚 Devecioğlu | Teslimat ve Ödeme Bilgileri</header>
+
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="fa-solid fa-car"></i> Devecioğlu</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="row g-4">
+      <!-- Sol taraf (Teslimat + Ödeme) -->
+      <div class="col-lg-8">
+        <!-- Teslimat Bilgileri -->
+        <section id="deliverySection" class="form-section mb-4">
+          <h2>Teslimat Bilgileri</h2>
+          <form id="deliveryForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Ad Soyad</label>
+                <input type="text" class="form-control" id="name" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Telefon</label>
+                <input type="tel" class="form-control" id="phone" placeholder="+90..." required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">E-posta</label>
+                <input type="email" class="form-control" id="email" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Ülke</label>
+                <input type="text" class="form-control" id="country" value="Türkiye" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Adres</label>
+                <textarea class="form-control" id="address" rows="3" required></textarea>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">İl</label>
+                <input type="text" class="form-control" id="city" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Posta Kodu</label>
+                <input type="text" class="form-control" id="postal" required>
+              </div>
+            </div>
+            <div class="text-end mt-4">
+              <button type="button" class="btn-next" id="continueBtn">Devam Et →</button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Ödeme Bilgileri -->
+        <section id="paymentSection" class="form-section hidden">
+          <h2>Ödeme Bilgileri</h2>
+
+          <div class="bg-light p-3 rounded mb-3">
+            <h5 class="fw-bold mb-3"><i class="fa-solid fa-credit-card"></i> Kredi / Banka Kartı</h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Kart Üzerindeki İsim</label>
+                <input type="text" class="form-control" placeholder="Ad Soyad">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Kart Numarası</label>
+                <input type="text" class="form-control" maxlength="19" placeholder="0000 0000 0000 0000">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Son Kullanma (AA/YY)</label>
+                <input type="text" class="form-control" maxlength="5" placeholder="08/28">
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">CVV</label>
+                <input type="text" class="form-control" maxlength="3" placeholder="123">
+              </div>
+              <div class="col-md-4 d-flex align-items-end">
+                <button class="btn-next w-100"><i class="fa-solid fa-lock"></i> Ödemeyi Tamamla</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white border rounded p-3">
+            <h5 class="fw-bold mb-2"><i class="fa-solid fa-building-columns"></i> Havale / EFT</h5>
+            <p>Hesap Adı: <strong>Devecioğlu Otomotiv A.Ş.</strong></p>
+            <p>IBAN: <strong>TR12 3456 7890 1234 5678 9012 34</strong></p>
+            <p>Açıklama kısmına ad-soyad ve sipariş numaranızı yazınız.</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sağ taraf (Sepet Özeti) -->
+      <div class="col-lg-4">
+        <aside class="cart-summary">
+          <h4>SEPET ÖZETİ</h4>
+          <hr>
+          <div class="row">
+            <div class="col-6"><p>Ara Toplam</p></div>
+            <div class="col-6 text-end"><p>4.300,00 TL</p></div>
+
+            <div class="col-6"><p>KDV</p></div>
+            <div class="col-6 text-end"><p>860,00 TL</p></div>
+
+            <div class="col-6"><p>Kargo</p></div>
+            <div class="col-6 text-end"><p>0,00 TL</p></div>
+
+            <hr class="my-3">
+
+            <div class="col-6"><p class="total">Toplam</p></div>
+            <div class="col-6 text-end"><p class="total">5.160,00 TL</p></div>
+          </div>
+
+          <button class="btn-pay mt-3">ÖDEME İŞLEMLERİ</button>
+          <p class="text-center text-muted small mt-3">
+            <i class="fa-solid fa-lock text-success"></i> Bu site SSL ile güvenlidir
+          </p>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p class="mb-1">📞 İletişim: 0(212) 511 98 73 | ✉️ info@deveciogullari.com</p>
+    <p class="small mb-0">© 2025 Devecioğlu | Geliştirici: Furkan</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const continueBtn = document.getElementById("continueBtn");
+    const deliveryForm = document.getElementById("deliveryForm");
+    const paymentSection = document.getElementById("paymentSection");
+
+    continueBtn.addEventListener("click", () => {
+      if (deliveryForm.checkValidity()) {
+        deliveryForm.classList.add("was-validated");
+        document.getElementById("deliverySection").classList.add("hidden");
+        paymentSection.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        deliveryForm.reportValidity();
+      }
+    });
+  </script>
+</body>
+</html>

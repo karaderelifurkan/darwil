@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Devecioğlu | Araç Multimedya & Ses Sistemleri</title>
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet">
+
+  <style>
+
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:"Segoe UI", Roboto, sans-serif;background-color:#f8f9fa;color:#333;line-height:1.4}
+    header{background:#234f9c;color:#fff;padding:8px;text-align:center;font-weight:500;font-size:0.9rem}
+
+    /* navbar */
+    .navbar{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+    .navbar-brand{font-weight:700;color:#0d6efd!important;font-size:1.3rem}
+    .btn-login,.btn-register{font-size:.9rem;font-weight:600;border:none;border-radius:6px;padding:6px 12px}
+    .btn-login{background:#0d6efd;color:#fff}
+    .btn-register{background:#198754;color:#fff}
+
+    /* arama */
+    .search-bar{max-width:700px;margin:1.5rem auto}
+    .search-bar .form-control{border-radius:12px 0 0 12px}
+    .search-bar .btn{border-radius:0 12px 12px 0}
+
+    /* kategori kutuları genel */
+    .category-icons{margin:2rem 0;text-align:center}
+    .category-icons .row-cats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+    .icon-box{
+      background:#fff;border-radius:12px;padding:22px 26px;margin:10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.05);transition:transform .22s,box-shadow .22s;
+      width:260px; height:140px; display:flex;flex-direction:column;justify-content:center;align-items:center;
+      position:relative; cursor:pointer;
+    }
+    .icon-box:hover{transform:translateY(-6px);box-shadow:0 8px 18px rgba(0,0,0,0.08)}
+    .icon-box i{font-size:2.1rem;margin-bottom:10px;color:#0d6efd}
+    .icon-box h6{font-weight:700;margin:0;color:#111}
+
+    /* model dropdown (açılır menü) */
+    .model-dropdown{
+      display:none;
+      position:absolute;
+      top: calc(100% + 10px);
+      left:50%;
+      transform:translateX(-50%);
+      width:260px;
+      background:#fff;border-radius:10px;padding:8px 0;
+      box-shadow:0 6px 20px rgba(0,0,0,0.12);
+      z-index:1200;
+      max-height:260px;overflow:auto;
+    }
+    .model-dropdown li{list-style:none;padding:10px 14px;text-align:left;border-bottom:1px solid #f1f1f1;cursor:pointer}
+    .model-dropdown li:last-child{border-bottom:none}
+    .model-dropdown li:hover{background:#0d6efd;color:#fff}
+
+    /* hover -> dropdown göster */
+    .model-box:hover + .model-dropdown,
+    .model-dropdown:hover{display:block}
+
+    /* teknik destek link rengini düzelt */
+    .icon-box a{color:inherit;text-decoration:none;display:block;width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+    .icon-box a h6{margin:0}
+    .icon-box a:hover h6{color:#0b5ed7}
+
+    /* ürün kartları */
+    .product-card{border:none;border-radius:15px;overflow:hidden;transition:transform .25s}
+    .product-card:hover{transform:translateY(-6px)}
+    .product-card img{border-bottom:1px solid #eee}
+    .card-body{background:#fff}
+    .btn-cart{background:#0d6efd;color:#fff;font-weight:600;border-radius:8px}
+    .btn-cart:hover{background:#0b5ed7}
+
+    /* info & footer */
+    .info-section{background:#fff;padding:3rem 1rem;border-radius:12px;margin-top:2rem}
+    .info-section i{font-size:2rem;color:#0d6efd}
+    footer{background:#0d6efd;color:#fff;padding:1.5rem 0;margin-top:3rem}
+    footer a{color:#fff;text-decoration:none}
+
+    /* responsive küçük ekran */
+    @media (max-width:767px){
+      .icon-box{width:48%;height:120px}
+      .search-bar{padding:0 12px}
+      .model-dropdown{left:20%;transform:none;width:200px}
+    }
+    @media (max-width:420px){
+      .icon-box{width:100%}
+      .model-dropdown{left:10%;width:220px}
+    }
+  </style>
+</head>
+
+<body>
+  <header>🚗 Araç Multimedya & Ses Sistemlerinde Uzman — Devecioğlu</header>
+
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Devecioğlu</a>
+      <div class="ms-auto d-flex gap-2">
+        <a href="{% url 'login' %}" class="btn-login">Giriş Yap</a>
+        <a href="{% url 'register' %}" class="btn-register">Kayıt Ol</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Arama Alanı -->
+  <div class="container text-center search-bar">
+    <form class="d-flex" method="GET">
+      <input name="q" class="form-control form-control-lg me-2" type="search" placeholder="Araç modeline veya ürüne göre ara...">
+      <button class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
+
+  <!-- Kategori Bölümü -->
+  <section class="category-icons container">
+    <div class="row-cats">
+
+      <!-- MODEL -->
+      <div class="position-relative">
+        <div class="icon-box model-box">
+          <i class="fa-solid fa-car-side"></i>
+          <h6>Model</h6>
+        </div>
+        <ul class="model-dropdown">
+          <li>Albea</li>
+          <li>Alfa Romeo</li>
+          <li>Audi</li>
+          <li>BMW</li>
+          <li>Chevrolet</li>
+          <li>Citroën</li>
+          <li>Opel</li>
+          <li>Renault</li>
+          <li>Dacia</li>
+          <li>Fiat</li>
+          <li>Ford</li>
+          <li>Volkswagen</li>
+          <li>Honda</li>
+          <li>Hyundai</li>
+          <li>Jeep</li>
+          <li>Kia</li>
+          <li>Mazda</li>
+          <li>Mercedes</li>
+          <li>Mini</li>
+          <li>Mitsubishi</li>
+          <li>Nissan</li>
+          <li>Peugeot</li>
+          <li>Porsche</li>
+          <li>Range Rover</li>
+          <li>Seat</li>
+          <li>Skoda</li>
+          <li>Subaru</li>
+          <li>Toyota</li>
+          <li>Isuzu</li>
+        </ul>
+      </div>
+
+      <!-- TEKNİK DESTEK -->
+      <div>
+        <div class="icon-box">
+          <i class="fa-solid fa-gear"></i>
+          <a href="{% url 'support' %}"><h6>Teknik Destek</h6></a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <h4 class="fw-bold mb-3">Popüler Ürünler</h4>
+<div class="row g-4">
+
+{% for p in popular_products %}
+  <div class="col-md-4">
+    <div class="card product-card">
+      <img src="{{ p.image.url }}" class="card-img-top" alt="">
+      <div class="card-body">
+        <h6 class="text-muted mb-1">{{ p.brand }}</h6>
+        <h5>{{ p.title }}</h5>
+        <p class="text-success fw-bold fs-5">{{ p.price }}</p>
+        <button class="btn btn-cart w-100"><i class="fa fa-cart-plus"></i> Sepete Ekle</button>
+      </div>
+    </div>
+  </div>
+{% empty %}
+  <p>Popüler ürün bulunamadı.</p>
+{% endfor %}
+
+
+<h4 class="fw-bold mb-3 mt-5">Tüm Ürünler</h4>
+<div class="row g-4">
+
+{% for p in products %}
+  <div class="col-md-4">
+    <div class="card product-card">
+      <img src="{{ p.image.url }}" class="card-img-top" alt="">
+      <div class="card-body">
+        <h6 class="text-muted mb-1">{{ p.brand }}</h6>
+        <h5>{{ p.title }}</h5>
+        <p class="text-success fw-bold fs-5">{{ p.price }}</p>
+        <button class="btn btn-cart w-100"><i class="fa fa-cart-plus"></i> Sepete Ekle</button>
+      </div>
+    </div>
+  </div>
+{% empty %}
+  <p>Aradığınız kriterlere uygun ürün bulunamadı.</p>
+{% endfor %}
+
+
+
+  <!-- Neden Devecioğlu -->
+  <div class="container info-section mt-5 text-center">
+    <h4 class="fw-bold mb-4">Neden Devecioğlu?</h4>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <i class="fa-solid fa-star mb-3"></i>
+        <h6>Yüksek Kalite</h6>
+        <p class="small text-muted">Tüm ürünler test edilip kalite onayı aldıktan sonra satışa sunulur.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="fa-solid fa-truck mb-3"></i>
+        <h6>Hızlı Teslimat</h6>
+        <p class="small text-muted">Siparişleriniz 24 saat içinde kargoya verilir.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="fa-solid fa-headset mb-3"></i>
+        <h6>7/24 Destek</h6>
+        <p class="small text-muted">Sorularınız için her zaman yanınızdayız.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center">
+    <p class="mb-1">📞 İletişim: 0(212) 511 98 73 | ✉️ info@devecioğlu.com</p>
+    <div>
+      <a href="https://www.instagram.com/deveciogullari_multimedya/?hl=tr"><i class="fab fa-instagram me-3"></i></a>
+      <a href="https://api.whatsapp.com/send/?phone=905380193693"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    <p class="mt-3 small">© 2025 Devecioğlu | Geliştirici: Furkan</p>
+  </footer>
+
+  <!-- Bootstrap JS (opsiyonel, dropdown vs. için) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

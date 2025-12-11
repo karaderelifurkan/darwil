@@ -1,0 +1,82 @@
+
+*{
+
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-size: cover;
+
+}
+
+
+body { font-family: "Segoe UI", Roboto, sans-serif; background-color: #f8f9fa; color: #333; }
+header { background: #0d6efd; color: #fff; padding: 8px; text-align: center; font-weight: 500; font-size: 0.9rem; }
+.navbar { background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); }
+.navbar-brand { font-weight: 700; color: #0d6efd !important; font-size: 1.3rem; }
+.btn-login, .btn-register {
+ font-size: 0.9rem; font-weight: 600; border: none; border-radius: 6px; padding: 6px 12px;
+}
+.btn-login { background: #0d6efd; color: #fff; }
+.btn-register { background: #198754; color: #fff; }
+.search-bar { max-width: 500px; margin: 1.5rem auto; }
+.category-icons { text-align: center; margin: 2rem 0; }
+.category-icons .icon-box {
+ background: #fff; border-radius: 12px; padding: 20px; margin: 10px;
+ box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: all 0.3s;
+}
+.category-icons .icon-box:hover { transform: translateY(-5px); }
+.product-card { border: none; border-radius: 15px; overflow: hidden; transition: transform 0.3s; }
+.product-card:hover { transform: translateY(-5px); }
+.product-card img { border-bottom: 1px solid #eee; }
+.card-body { background: #fff; }
+.btn-cart { background: #0d6efd; color: #fff; font-weight: 600; }
+.btn-cart:hover { background: #0b5ed7; }
+.info-section { background: #fff; padding: 3rem 1rem; border-radius: 12px; margin-top: 2rem; }
+.info-section i { font-size: 2rem; color: #0d6efd; }
+footer { background: #0d6efd; color: #fff; padding: 1.5rem 0; margin-top: 3rem; }
+footer a { color: #fff; text-decoration: none; }
+
+
+
+
+.category-icons .icon-box {
+background: #fff;
+border-radius: 12px;
+padding: 25px 10px;
+margin: 10px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+transition: all 0.3s;
+
+/* DÜZELTME — BOXLARIN EŞİTLENMESİ */
+height: 125px;
+display: flex;
+background-size: cover;
+background-position: top;
+position: relative;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.category-icons .icon-box i {
+font-size: 2rem;
+margin-bottom: 10px;
+}
+
+.category-icons .icon-box h6 {
+font-weight: 600;
+margin: 0;
+text-align: center;
+}
+
+/* Mobilde daha iyi hizalama */
+@media (max-width: 576px) {
+.category-icons .icon-box {
+height: 130px;
+padding: 15px;
+}
+.category-icons .icon-box i {
+font-size: 1.8rem;
+}
+}
+
